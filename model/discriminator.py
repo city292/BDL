@@ -42,4 +42,13 @@ class FCDiscriminator(nn.Module):
         else:
             optimizer.param_groups[0]['lr'] = args.learning_rate_D * (0.1**(int(i/50000)))
             if len(optimizer.param_groups) > 1:
-                optimizer.param_groups[1]['lr'] = args.learning_rate_D * (0.1**(int(i/50000))) * 2  			
+                optimizer.param_groups[1]['lr'] = args.learning_rate_D * (0.1**(int(i/50000))) * 2
+
+
+if __name__ == '__main__':
+    net = FCDiscriminator(16)
+    import numpy as np
+
+    image = np.zeros([32, 3, 256, 256], np.float)
+    image = torch.from_numpy(image).float()
+    y = net(image)
